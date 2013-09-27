@@ -142,7 +142,6 @@ mapping_table = {
     'create_user': {
         'path': '/users.json',
         'method': 'POST',
-        'status': 201,
     },
     'create_many_users': {
         'path': '/users/create_many.json',
@@ -241,6 +240,32 @@ mapping_table = {
     'delete_user_identity': {
         'path': '/users/{{user_id}}/identities/{{identity_id}}.json',
         'method': 'DELETE',
+    },
+
+    # User Fields
+    'list_user_fields': {
+        'path': '/user_fields.json',
+        'method': 'GET',
+    },
+    'show_user_field': {
+        'path': '/user_fields/{{user_id}}.json',
+        'method': 'GET',
+    },
+    'create_user_fields': {
+        'path': '/user_fields.json',
+        'method': 'POST',
+    },
+    'update_user_fields': {
+        'path': '/user_fields/{{user_id}}.json',
+        'method': 'POST',
+    },
+    'delete_user_field': {
+        'path': '/user_fields/{{user_id}}.json',
+        'method': 'DELETE',
+    },
+    'reorder_user_field': {
+        'path': '/user_fields/reorder.json',
+        'method': 'PUT',
     },
 
     # Groups
