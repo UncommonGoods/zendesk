@@ -61,11 +61,11 @@ class AuthenticationError(ZendeskError):
         return repr(self.msg)
 
 
-re_identifier = re.compile(r".*/(?P<identifier>\d+)\.(json|xml)")
-def get_id_from_url(url):
-    match = re_identifier.match(url)
-    if match and match.group('identifier'):
-        return match.group('identifier')
+# re_identifier = re.compile(r".*/(?P<identifier>\d+)\.(json|xml)")
+# def get_id_from_url(url):
+#     match = re_identifier.match(url)
+#     if match and match.group('identifier'):
+#         return match.group('identifier')
 
 
 def clean_kwargs(kwargs):
@@ -232,9 +232,14 @@ class Zendesk(object):
 
         # Deserialize json content if content exist. In some cases Zendesk
         # returns ' ' strings. Also return false non strings (0, [], (), {})
+        if content.strip():
+            try:
+                decoded = json.loads(content)
+                if len(decoded) > 0: return decoded
+            except Exception:
+                pass
+
         if response.get('location'):
             return response.get('location')
-        elif content.strip():
-            return json.loads(content)
         else:
             return responses[response_status]
